@@ -80,8 +80,8 @@ const Navbar = () => {
             </button>
           </div>
       
-          <Link to="/login" className="btn font-semibold">
-            Log in
+          <Link to="/signin" className="btn font-semibold">
+            Sign In
           </Link>
         
       </div>

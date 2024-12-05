@@ -7,6 +7,8 @@ import { AuthProvider } from "./providers/AuthProvider";
 import Home from "./pages/Home/Home";
 import Visas from "./pages/Visas/Visas";
 import AddVisa from "./pages/AddVisa/AddVisa";
+import SignIn from "./components/SignIn/SignIn"
+import SignUp from "./components/SignUp/SignUp"
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home />
+      },
+      {
+        path:"/signin",
+        element:<SignIn />
+      },
+      {
+        path:"/signup",
+        element:<SignUp />
       },
       {
         path:"/allVisas",
