@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-
+  const { user, signOutUser } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(true);
 
+  // const handleSignOut = ()=>{
+
+  // }
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -15,18 +19,19 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/allVisas">Visas</NavLink>
+        <NavLink to="/allVisas">All Visas</NavLink>
       </li>
       <li>
         <NavLink to="/addVisa">Add Visa</NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/applications">My Applications</NavLink>
-      </li>
+      </li> */}
     </div>
   );
   return (
-    <div className="sticky top-0 z-20 navbar bg-base-100 py-4 shadow-lg">
+    // sticky top-0 z-20 bg-base-100  shadow-lg for fixed layout
+    <div className=" navbar py-4 bg-white">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -70,20 +75,19 @@ const Navbar = () => {
         </Link>
         <ul className="menu  px-1 hidden lg:menu-horizontal">{links}</ul>
       </div>
-      
-      <div className="navbar-end flex items-center">
 
-        
+      <div className="navbar-end flex items-center">
+        {user && user?.email ? (
           <div>
-            <button  className="btn font-semibold">
-              Log out
+            <button onClick={signOutUser} className="btn font-semibold">
+              Sign out
             </button>
           </div>
-      
+        ) : (
           <Link to="/signin" className="btn font-semibold">
             Sign In
           </Link>
-        
+        )}
       </div>
     </div>
   );

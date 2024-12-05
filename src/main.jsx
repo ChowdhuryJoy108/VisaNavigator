@@ -9,6 +9,7 @@ import Visas from "./pages/Visas/Visas";
 import AddVisa from "./pages/AddVisa/AddVisa";
 import SignIn from "./components/SignIn/SignIn"
 import SignUp from "./components/SignUp/SignUp"
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Home />
+        element:<Home />,
+        loader:() => fetch('http://localhost:8080/addVisa')
       },
       {
         path:"/signin",
@@ -29,11 +31,14 @@ const router = createBrowserRouter([
       },
       {
         path:"/allVisas",
-        element:<Visas />
+        element:<Visas />,
+        loader:()=>fetch('http://localhost:8080/addVisa')
       },
       {
         path:"addVisa",
-        element:<AddVisa />
+        element:<PrivateRoute>
+          <AddVisa />
+        </PrivateRoute>
       }
       
     ]
