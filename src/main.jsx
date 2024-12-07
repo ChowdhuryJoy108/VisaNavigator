@@ -10,6 +10,9 @@ import AddVisa from "./pages/AddVisa/AddVisa";
 import SignIn from "./components/SignIn/SignIn"
 import SignUp from "./components/SignUp/SignUp"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import SeeDetails from "./pages/SeeDetails/SeeDetails";
+import MyAddedVisas from "./pages/MyAddedVisas/MyAddedVisas";
+import MyvisaApplications from "./pages/MyVisaApplications/MyvisaApplications";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +42,26 @@ const router = createBrowserRouter([
         element:<PrivateRoute>
           <AddVisa />
         </PrivateRoute>
+      },
+      {
+        path:"details/:id",
+        element:<PrivateRoute>
+          <SeeDetails />
+        </PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:8080/addVisa/${params.id}`)
+      },
+      {
+        path:'myAddedVisas',
+        element:<PrivateRoute>
+          <MyAddedVisas />
+        </PrivateRoute>,
+        loader:()=>fetch('http://localhost:8080/addVisa'),
+      },
+      {
+        path:'myVisaApplications',
+        element:<PrivateRoute> 
+          <MyvisaApplications />
+        </PrivateRoute>,
       }
       
     ]

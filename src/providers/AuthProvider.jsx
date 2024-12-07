@@ -65,7 +65,7 @@ const AuthProvider = ({children}) => {
 };
 
 AuthProvider.propTypes = {
-    children : PropTypes.func
+    children : PropTypes.object
 }
 
 export { AuthContext, AuthProvider};

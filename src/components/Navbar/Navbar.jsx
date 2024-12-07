@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -24,9 +25,12 @@ const Navbar = () => {
       <li>
         <NavLink to="/addVisa">Add Visa</NavLink>
       </li>
-      {/* <li>
-        <NavLink to="/applications">My Applications</NavLink>
-      </li> */}
+      <li>
+        <NavLink to="/myAddedVisas">My Added Visas</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myVisaApplications">My Visa Applications</NavLink>
+      </li>
     </div>
   );
   return (
@@ -71,7 +75,7 @@ const Navbar = () => {
           )}
         </div>
         <Link to="/" className="mr-4 lg:mr-8">
-          <h1>V.Navigator</h1>
+          <img src={Logo} alt="Website logo" className="w-20 h-20" />
         </Link>
         <ul className="menu  px-1 hidden lg:menu-horizontal">{links}</ul>
       </div>
