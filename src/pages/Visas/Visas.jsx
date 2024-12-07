@@ -16,7 +16,14 @@ const Visas = () => {
 
 
   const handleSortByVisaTypes = (type) =>{
-    console.log(type)
+    fetch('http://localhost:8080/addVisa')
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data)
+      const filterByVisaType = data.filter(visa => visa.visaType === type);
+      setVisas(filterByVisaType)
+    })
+   
   }
 
   return (

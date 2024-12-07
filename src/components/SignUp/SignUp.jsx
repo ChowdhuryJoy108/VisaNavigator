@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -19,9 +20,13 @@ const SignUp = () => {
     const checkLowerCase = /[a-z]/;
     const minPasswordLength = 6;
 
-    // if (!checkUpperCase.test(password)) {
-    //   return toast("Password must have at least one uppercase letter.");
-    // }
+    if (!checkUpperCase.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must have at least one uppercase letter.",
+      })
+    }
 
     // if (!checkLowerCase.test(password)) {
     //   return toast("Password must have at least one lowercase letter.");
