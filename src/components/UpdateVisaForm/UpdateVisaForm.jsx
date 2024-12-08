@@ -51,7 +51,7 @@ const UpdateVisaForm = ({visaId, visa, setIsModalOpen}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8080/updateVisa/${visaId}`, {
+    fetch(`https://visa-navigator-server-wheat.vercel.app/updateVisa/${visaId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const UpdateVisaForm = ({visaId, visa, setIsModalOpen}) => {
         console.log("Visa updated:", data);
 
       
-        if(data.modifiedCount){
+        if(data.modifiedCount > 0){
             Swal.fire({
                 title: 'Success!',
                 text: 'Visa Updated successfully!',
@@ -80,6 +80,7 @@ const UpdateVisaForm = ({visaId, visa, setIsModalOpen}) => {
           title: "Oops...",
           text: `Error Updating Visa : ${error.message}`,
         })
+        setIsModalOpen(false);
       });
   };
 

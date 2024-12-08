@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home />,
-        loader:() => fetch('http://localhost:8080/addVisa')
+        loader:() => fetch('https://visa-navigator-server-wheat.vercel.app/addVisa')
       },
       {
         path:"/signin",
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path:"/allVisas",
         element:<Visas />,
-        loader:()=>fetch('http://localhost:8080/addVisa')
+        loader:()=>fetch('https://visa-navigator-server-wheat.vercel.app/addVisa')
       },
       {
         path:"addVisa",
@@ -50,21 +50,20 @@ const router = createBrowserRouter([
         element:<PrivateRoute>
           <SeeDetails />
         </PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:8080/addVisa/${params.id}`)
+        loader:({params})=>fetch(`https://visa-navigator-server-wheat.vercel.app/addVisa/${params.id}`)
       },
       {
         path:'myAddedVisas',
         element:<PrivateRoute>
           <MyAddedVisas />
         </PrivateRoute>,
-        loader:()=>fetch('http://localhost:8080/addVisa'),
+        loader:()=>fetch('https://visa-navigator-server-wheat.vercel.app/addVisa'),
       },
       {
         path:'myVisaApplications',
         element:<PrivateRoute> 
           <MyVisaApplications />
         </PrivateRoute>,
-        loader:()=>fetch('http://localhost:8080/allApplications')
       }
       
     ]

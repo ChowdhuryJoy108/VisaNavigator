@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const UserApplicationCard = ({visaDetails,setIsModalOpen}) => {
   const {user} = useContext(AuthContext)
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     visaDetails,
-    email: visaDetails?.user, // Replace with the logged-in user's email
+    email: visaDetails?.user,
     firstName: "",
     lastName: "",
     appliedDate: new Date().toISOString().split("T")[0], // Current date
@@ -21,9 +23,8 @@ const UserApplicationCard = ({visaDetails,setIsModalOpen}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
 
-    fetch('http://localhost:8080/applyVisa',{
+    fetch('https://visa-navigator-server-wheat.vercel.app/applyVisa',{
         method:'POST',
         headers:{
           "content-type": "application/json",
@@ -41,6 +42,7 @@ const UserApplicationCard = ({visaDetails,setIsModalOpen}) => {
                 confirmButtonText: 'Close'
               })
               setIsModalOpen(false)
+              navigate('/myVisaApplications')
         }
     }).catch(err => {
         Swal.fire({

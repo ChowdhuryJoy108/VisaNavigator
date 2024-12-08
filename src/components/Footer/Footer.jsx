@@ -2,10 +2,11 @@ import React from "react";
 import Logo from '../../assets/logo.png'
 const Footer = () => {
   return (
-    <footer className="footer bg-base-100 text-base-content p-10 mt-[150px]">
+    <footer className="footer px-4 bg-base-200 text-base-content py-6 mt-[150px] ">
+    
       <nav>
-        <img src={Logo} alt="" width={150}/>
-        <p className="w-[300px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt sed, aliquam natus laboriosam laborum velit mollitia asperiores.</p>
+        <img src={Logo} alt="" width={150} className="rounded-full"/>
+        <p className="w-full lg:w-[300px]">Visa Navigator simplifies your travel dreams by providing comprehensive visa information, guidance, and resources for a smooth application process.</p>
       </nav>
       <nav>
         <h6 className="footer-title">Company</h6>

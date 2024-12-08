@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 
 const VisaCard = ({item}) => {
-  const {_id, CountryImage, countryName, visaType, processingTime, fee, validity, } = item
-  console.log(_id)
+  const {_id, countryImage, countryName, visaType, processingTime, fee, validity, } = item;
   return (
     <div className="card bg-base-100 w-full shadow-xl lg:w-96">
       <figure className="px-10 pt-10">
         <img
-          src={CountryImage}
+          src={countryImage}
           alt="Country Image"
-          className="rounded-xl"
+          className="rounded-xl h-[200px]"
         />
       </figure>
       <div className="card-body items-start space-y-2">

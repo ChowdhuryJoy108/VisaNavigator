@@ -1,8 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddVisa = () => {
-  const { user } = useContext(AuthContext);
+  const { user,setLoading } = useContext(AuthContext);
+  useEffect(()=>{
+    document.title = "Add Visa"
+    setLoading(false)
+  },[])
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     user: user?.email,
     countryImage: "",
@@ -59,9 +66,8 @@ const AddVisa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
 
-    fetch("http://localhost:8080/addVisa", {
+    fetch("https://visa-navigator-server-wheat.vercel.app/addVisa", {
       method: "POST",
       headers: {
 
@@ -71,7 +77,21 @@ const AddVisa = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if(data.insertedId){
+          Swal.fire({
+            icon: "Success",
+            title: "yAy..",
+            text: 'Visa Added SuccessFully!',
+          })
+          navigate(-1)
+        }
         console.log(data);
+      }).catch((error) =>{
+        Swal.fire({
+          icon: "error",
+          title: "Oopss..",
+          text: 'Visa Added Failed!',
+        })
       });
   };
 

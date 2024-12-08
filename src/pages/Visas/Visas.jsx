@@ -16,10 +16,9 @@ const Visas = () => {
 
 
   const handleSortByVisaTypes = (type) =>{
-    fetch('http://localhost:8080/addVisa')
+    fetch('https://visa-navigator-server-wheat.vercel.app/addVisa')
     .then(res => res.json())
     .then(data =>{
-      console.log(data)
       const filterByVisaType = data.filter(visa => visa.visaType === type);
       setVisas(filterByVisaType)
     })
@@ -28,7 +27,10 @@ const Visas = () => {
 
   return (
     <div>
-      <p>{laodedData.length}</p>
+      <div className="flex flex-col items-center space-y-4  my-[50px]">
+        <h1 className="text-xl font-bold lg:text-4xl">Connecting You to the World!</h1>
+        <p className="w-full text-center text-gray-600 lg:w-[700px]">Explore all visa options in one place! Find detailed information, eligibility, and application steps to make your global journey seamless and hassle-free.</p>
+      </div>
       <div className="flex items-center justify-center">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
@@ -45,7 +47,7 @@ const Visas = () => {
           </ul>
         </div>
       </div>
-      <h1>All added visas by all users will be displayed here!</h1>
+      
       <div className="grid gap-4 mt-4 px-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {visas.map((item) => (
           <VisaCard key={item._id} item={item} />

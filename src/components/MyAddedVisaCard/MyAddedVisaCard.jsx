@@ -5,7 +5,7 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
 }) => {
   const {
     _id,
-    CountryImage,
+    countryImage,
     countryName,
     visaType,
     processingTime,
@@ -17,8 +17,8 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
   const openModal = () => setIsModalOpen(true);
   
   const handleDelete = (id) =>{
-        console.log(id);
-        fetch(`http://localhost:8080/delete/${id}`,
+      
+        fetch(`https://visa-navigator-server-wheat.vercel.app/delete/${id}`,
           {
             method:'DELETE',
             headers:{
@@ -29,7 +29,7 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
         )
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+   
           if(data.deleteCount > 0){
             Swal.fire({
               title: 'Success!',
@@ -37,16 +37,15 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
               icon: 'success',
               confirmButtonText: 'Close'
             })
-            const remaining = myAddedvisas.filter(myVisa => myVisa._id !== _id);
-            console.log(remaining);
-            setMyAddedVisas(remaining)
           }
+          const remaining = myAddedvisas.filter(myVisa => myVisa._id !== _id);
+          setMyAddedVisas(remaining)
         })
   }
   return (
     <div className="card bg-base-100 w-full shadow-xl lg:w-96">
       <figure className="px-10 pt-10">
-        <img src={CountryImage} alt="Country Image" className="rounded-xl" />
+        <img src={countryImage} alt="Country Image" className="rounded-xl h-[200px]" />
       </figure>
       <div className="card-body items-start space-y-2">
         <h2 className="card-title">Country Name : {countryName}</h2>

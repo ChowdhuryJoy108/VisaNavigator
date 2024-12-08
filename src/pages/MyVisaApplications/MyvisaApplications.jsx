@@ -5,25 +5,33 @@ import AppliedVisaCard from "../../components/AppliedVisaCard/AppliedVisaCard";
 
 const MyVisaApplications = () => {
   const { user } = useContext(AuthContext);
-  const loadedVisaApplications = useLoaderData();
-  const [allVisaApplications, setAllVisaApplications] = useState(
-    loadedVisaApplications
-  );
-  const filteredApplications = allVisaApplications.filter(
-    (application) => application.logInUser === user?.email
-  );
-  const [applications, setApplications] = useState(filteredApplications);
-  const [search, setSearch] = useState("");
-  console.log(search);
+ 
+  const [applications, setApplications] = useState([]);
+  useEffect(()=>{
+    fetch('https://visa-navigator-server-wheat.vercel.app/allApplications')
+    .then(res => res.json())
+    .then(data => {
+        const filterData = data.filter(appli => appli?.logInUser === user?.email)
+        setApplications(filterData)
+    })
+    
+  },[])
 
+  const [search, setSearch] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:8080/allApplications?searchParams=${search}`)
+    fetch(`https://visa-navigator-server-wheat.vercel.app/allApplications?searchParams=${search}`)
       .then((res) => res.json())
-      .then((data) => setApplications(data));
+      .then((data) => {
+        const filterData = data.filter(appli => appli?.logInUser === user?.email)
+        setApplications(filterData)
+      });
   }, [search]);
   return (
     <div className="px-2">
-      <h1>This is my Visa Applications page! </h1>
+      <div className="flex flex-col items-center gap-4 my-[50px]">
+        <h1 className="text-xl text-center font-bold lg:text-4xl">Seamless Management for Your Visa Applications.</h1>
+        <p className="text-center w-full text-gray-600 lg:w-[700px]">Manage your visa applications effortlessly. View all your applied visas, track progress, and cancel applications easily. Stay in control with a user-friendly experience.</p>
+      </div>
       <div className="flex justify-center mb-10">
         <input
           onChange={(e) => setSearch(e.target.value)}

@@ -1,21 +1,17 @@
 import { useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate} from "react-router-dom";
 import UserApplicationCard from "../../components/UserApplicationCard/UserApplicationCard";
 
 const SeeDetails = () => {
-  // const {id } = useParams()
+  const navigate= useNavigate()
   const visaData = useLoaderData();
   const [visaDetails, setVisaDetails] = useState(visaData);
-  console.log(visaData);
-  console.log(visaDetails);
-  const { countryName, visaType, processingTime, fee, validity } = visaDetails;
+ 
+  const { countryImage, countryName, visaType, processingTime, fee, validity } = visaDetails;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    // navigate(-1);
-  };
+ 
   const handleApplyForVisa = () =>{
     setIsModalOpen(true)
   }
@@ -32,11 +28,11 @@ const SeeDetails = () => {
         </p>
       </div>
       <div className="card flex-col w-full  card-side bg-base-100 shadow-xl my-[50px] lg:w-[800px] mx-auto lg:flex-row">
-        <figure>
+        <figure >
           <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+            src={countryImage}
             alt="Movie"
-            className="w-full"
+            className="w-full lg:w-[400px]"
           />
         </figure>
         <div className="card-body">
@@ -57,12 +53,7 @@ const SeeDetails = () => {
         <div className="fixed z-20 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div className="modal modal-open">
           <div className="modal-box">
-            <UserApplicationCard  setIsModalOpen={setIsModalOpen} visaDetails={visaDetails}/>
-            <div className="modal-action justify-center">
-              <button className="btn" onClick={closeModal}>
-                Close
-              </button>
-            </div>
+            <UserApplicationCard  setIsModalOpen={setIsModalOpen} visaDetails={visaDetails}/>        
           </div>
         </div>
       </div>

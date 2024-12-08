@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   const navigate = useNavigate()
-  const { createUser,updateProfileInfo } = useContext(AuthContext);
+  const { createUser,updateProfileInfo, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
@@ -50,18 +50,44 @@ const SignUp = () => {
           displayName: name,
           photoURL: photo,
         })
-          // .then(() => alert("updated!"))
-          // .catch((error) => alert(error.message));
-
-        (`User Registered Successfully! WelCome!`);
+        
+          Swal.fire({
+            icon: "Success",
+            title: "yAy..",
+            text: 'User Registered Successully. welcome!',
+          })
         navigate("/");
       })
-      .catch((error) => alert("ERROR ", error.message));
+      .catch((error) => {
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Registration Failed : ${error.message}`,
+      })
+    });
   };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const handleGoogleRegistration = ()=>{
+    signInWithGoogle()
+    .then(result => {
+      Swal.fire({
+        icon: "Success",
+        title: "yAy..",
+        text: 'User Registered Successully. welcome!',
+      })
+
+    }).catch(error => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Registration Failed : ${error.message}`,
+      })
+    })
+  }
 
   return (
     <div className="card bg-base-100 w-full max-w-sm mx-auto shrink-0 shadow-2xl mt-8 mb-8">
@@ -137,7 +163,7 @@ const SignUp = () => {
       </form>
       <div className="btn mb-2 mx-6 flex items-center btn-outline">
         <FaGoogle />
-        {/* <button onClick={handleGoogleRegistration}>Register with Google</button> */}
+        <button onClick={handleGoogleRegistration}>Register with Google</button>
       </div>
     </div>
   );

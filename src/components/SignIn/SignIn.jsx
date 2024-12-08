@@ -1,34 +1,63 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 const SignIn = () => {
-  const {signInUser} = useContext(AuthContext)
+  const {signInUser,signInWithGoogle } = useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   
   const handleSubmit = (e) =>{
     e.preventDefault();
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email,password)
+
 
     signInUser (email, password)
     .then((userCredential) => {
       
       const user = userCredential.user;
-      console.log(user)
+      Swal.fire({
+        icon: "Success",
+        title: "yAy..",
+        text: 'User Logged In Successully. welcome!',
+      })
+      navigate("/");
       
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Sign In Failed : ${error.message}`,
+      })
     });
   }
 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); 
+  };
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then((result) => {
+        Swal.fire({
+          icon: "Success",
+          title: "yAy..",
+          text: 'User Logged In Successully with Gmail Account!',
+        })
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Sign In Failed : ${error.message}`,
+        })
+      });
   };
   return (
     <div className="card bg-base-100 w-full max-w-sm mx-auto shrink-0 shadow-2xl mt-8 mb-8">
@@ -87,7 +116,7 @@ const SignIn = () => {
         <div className="divider">OR</div>
       </form>
       <div className="btn mb-2 mx-6 flex items-center btn-outline">
-        <button>Login with Google</button>
+        <button onClick={handleGoogleLogin}>Login with Google</button>
       </div>
     </div>
   );

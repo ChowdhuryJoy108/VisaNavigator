@@ -8,9 +8,7 @@ const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(true);
 
-  // const handleSignOut = ()=>{
-
-  // }
+  
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };

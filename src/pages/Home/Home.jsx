@@ -12,14 +12,7 @@ const Home = () => {
   const slicedData = data.slice(0, 6);
   console.log(slicedData);
 
-  const handleType = (count) => {
-    // access word count number
-    console.log(count)
-  }
-
-  const handleDone = () => {
-    console.log(`Done after 5 loops!`)
-  }
+  
   return (
     <div className="w-full px-2 lg:p-0">
       <div >
@@ -39,8 +32,6 @@ const Home = () => {
             typeSpeed={70}
             deleteSpeed={50}
             delaySpeed={1000}
-            onLoopDone={handleDone}
-            onType={handleType}
           />
         </span>
         </h1>
@@ -51,13 +42,13 @@ const Home = () => {
             <VisaCard key={item._id} item={item} />
           ))}
         </div>
-        <div className="flex items-center justify-center mt-10">
+        <div className="flex items-center justify-center mt-10 mb-[50px]">
         <Link to={"/allVisas"} >
           <button className="btn btn-success text-white">See All Visas</button>
         </Link>
         </div>
-        <Reviews />
-        <Thoughts />
+        {/* <Reviews />
+        <Thoughts /> */}
       </div>
     </div>
   );

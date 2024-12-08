@@ -8,7 +8,7 @@ const AppliedVisaCard = ({
 }) => {
   const { _id, firstName, lastName, appliedDate, logInUser } = application;
   const {
-    CountryImage,
+    countryImage,
     countryName,
     visaType,
     processingTime,
@@ -18,8 +18,8 @@ const AppliedVisaCard = ({
   } = application.visaDetails;
 
   const handleDeleteApplication = (id) => {
-    console.log(id);
-    fetch(`http://localhost:8080/deleteApplication/${id}`, {
+ 
+    fetch(`https://visa-navigator-server-wheat.vercel.app/deleteApplication/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -27,7 +27,7 @@ const AppliedVisaCard = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       
         if (data.deleteCount > 0) {
           Swal.fire({
             title: "Success!",
@@ -45,7 +45,7 @@ const AppliedVisaCard = ({
   return (
     <div className="card bg-base-100 w-full shadow-xl lg:w-96">
       <figure className="px-10 pt-10">
-        <img src={CountryImage} alt="Country Image" className="rounded-xl" />
+        <img src={countryImage} alt="Country Image" className="rounded-xl" />
       </figure>
       <div className="card-body items-start space-y-2">
         <h2 className="card-title">Country Name : {countryName}</h2>
