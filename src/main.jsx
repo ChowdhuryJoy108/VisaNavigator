@@ -12,12 +12,14 @@ import SignUp from "./components/SignUp/SignUp"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SeeDetails from "./pages/SeeDetails/SeeDetails";
 import MyAddedVisas from "./pages/MyAddedVisas/MyAddedVisas";
-import MyvisaApplications from "./pages/MyVisaApplications/MyvisaApplications";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import MyVisaApplications from "./pages/MyVisaApplications/MyvisaApplications";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<ErrorPage />,
     children:[
       {
         path:"/",
@@ -60,8 +62,9 @@ const router = createBrowserRouter([
       {
         path:'myVisaApplications',
         element:<PrivateRoute> 
-          <MyvisaApplications />
+          <MyVisaApplications />
         </PrivateRoute>,
+        loader:()=>fetch('http://localhost:8080/allApplications')
       }
       
     ]

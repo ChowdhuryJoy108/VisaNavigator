@@ -37,14 +37,14 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
               icon: 'success',
               confirmButtonText: 'Close'
             })
+            const remaining = myAddedvisas.filter(myVisa => myVisa._id !== _id);
+            console.log(remaining);
+            setMyAddedVisas(remaining)
           }
-          const remaining = myAddedvisas.filter(myVisa => myVisa._id !== _id);
-          console.log(remaining);
-          setMyAddedVisas(remaining)
         })
   }
   return (
-    <div className="card bg-base-100 w-96 shadow-xl">
+    <div className="card bg-base-100 w-full shadow-xl lg:w-96">
       <figure className="px-10 pt-10">
         <img src={CountryImage} alt="Country Image" className="rounded-xl" />
       </figure>
