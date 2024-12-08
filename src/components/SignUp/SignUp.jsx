@@ -28,25 +28,32 @@ const SignUp = () => {
       })
     }
 
-    // if (!checkLowerCase.test(password)) {
-    //   return toast("Password must have at least one lowercase letter.");
-    // }
+    if (!checkLowerCase.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must have at least one lowercase letter.",
+      })
+    }
 
-    // if (password.length < minPasswordLength) {
-    //   toast("Password must be at least 6 characters long.");
-    // }
+    if (password.length < minPasswordLength) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters long.",
+      })
+    }
 
     createUser(email, password)
       .then((userCredentails) => {
-        // console.log(userCredentails.user);
         updateProfileInfo({
           displayName: name,
           photoURL: photo,
         })
-          .then(() => alert("updated!"))
-          .catch((error) => alert(error.message));
+          // .then(() => alert("updated!"))
+          // .catch((error) => alert(error.message));
 
-        alert(`User Registered Successfully! WelCome!`);
+        (`User Registered Successfully! WelCome!`);
         navigate("/");
       })
       .catch((error) => alert("ERROR ", error.message));

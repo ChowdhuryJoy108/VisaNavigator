@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import {useState } from "react";
+
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -51,9 +51,6 @@ const UpdateVisaForm = ({visaId, visa, setIsModalOpen}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (you can send the updated form data to a server)
-    console.log("Form submitted:", formData);
-
     fetch(`http://localhost:8080/updateVisa/${visaId}`, {
       method: "PUT",
       headers: {
@@ -76,10 +73,13 @@ const UpdateVisaForm = ({visaId, visa, setIsModalOpen}) => {
               setIsModalOpen(false);
               navigate('/allVisas')
         }
-        // You could redirect or show a success message here
       })
       .catch((error) => {
-        console.error("Error updating visa:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Error Updating Visa : ${error.message}`,
+        })
       });
   };
 

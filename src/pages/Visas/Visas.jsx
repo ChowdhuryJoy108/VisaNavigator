@@ -41,12 +41,7 @@ const Visas = () => {
             {
                 visaTypes.map((type, index) =>  <li onClick={()=>handleSortByVisaTypes(type)} className="p-2 text-black hover:bg-black hover:text-white rounded-xl" key={index}>{type}</li>)
             }
-            {/* <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li> */}
+
           </ul>
         </div>
       </div>

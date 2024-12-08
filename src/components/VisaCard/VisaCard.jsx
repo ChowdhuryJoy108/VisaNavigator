@@ -4,7 +4,7 @@ const VisaCard = ({item}) => {
   const {_id, CountryImage, countryName, visaType, processingTime, fee, validity, } = item
   console.log(_id)
   return (
-    <div className="card bg-base-100 w-96 shadow-xl">
+    <div className="card bg-base-100 w-full shadow-xl lg:w-96">
       <figure className="px-10 pt-10">
         <img
           src={CountryImage}

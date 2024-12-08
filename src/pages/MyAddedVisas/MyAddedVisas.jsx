@@ -9,8 +9,7 @@ const MyAddedVisas = () => {
   const loadedData = useLoaderData();
   const [ myAddedvisas, setMyAddedVisas] = useState(loadedData)
   const filteredData = myAddedvisas.filter((data) => data?.user === user?.email);
-  console.log(filteredData);
-
+ 
 
   return (
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

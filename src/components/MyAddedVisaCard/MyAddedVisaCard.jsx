@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import UpdateVisaForm from "../UpdateVisaForm/UpdateVisaForm";
 
 const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
@@ -31,6 +30,14 @@ const MyAddedVisaCard = ({visa, myAddedvisas, setMyAddedVisas
         .then(res => res.json())
         .then(data => {
           console.log(data)
+          if(data.deleteCount > 0){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Visa Deleted successfully!',
+              icon: 'success',
+              confirmButtonText: 'Close'
+            })
+          }
           const remaining = myAddedvisas.filter(myVisa => myVisa._id !== _id);
           console.log(remaining);
           setMyAddedVisas(remaining)

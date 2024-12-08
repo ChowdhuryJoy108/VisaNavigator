@@ -59,7 +59,6 @@ const AddVisa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (you can send the form data to a server)
     console.log("Form submitted:", formData);
 
     fetch("http://localhost:8080/addVisa", {
